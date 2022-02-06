@@ -12,6 +12,7 @@ It aims to show the following Spring, Hibernate and Java features:
 - Docker
 - Annotations and interceptors
 - CI/CD (Spotless, Sonarqube)
+- Test containers (using a @TestConfiguration for integration tests)
 
 ## Configuration
 

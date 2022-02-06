@@ -9,10 +9,8 @@ public class MovieTest {
   @Test
   void initializeMovie() {
     final String name = "Die Hard";
-    final long id = 1L;
-    final Movie movie = new Movie(id, name);
+    final Movie movie = new Movie(name);
 
-    assertThat(movie.getId()).isEqualTo(id);
     assertThat(movie.getName()).isEqualTo(name);
   }
 }

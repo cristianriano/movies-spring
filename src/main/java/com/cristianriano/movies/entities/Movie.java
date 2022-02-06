@@ -4,10 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
 @Entity
 @Table(name = "movies")
@@ -16,6 +14,10 @@ public class Movie {
   @GeneratedValue
   private long id;
   private String name;
+
+  public Movie(final String name) {
+    this.name = name;
+  }
 
   Movie() {}
 }
