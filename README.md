@@ -22,6 +22,16 @@ This project uses:
 - Spring Boot 2.6.3
 - MySQL 5.7
 
+### Database
+
+Connect to MySQL with a user with permissions to create users and dbs
+
+```mysql
+create database movies_dev;
+create user 'movies'@'%' identified by 'ThePassword';
+grant all on movies_dev.* to 'movies'@'%';
+```
+
 ## Run
 
 The app uses the Tomcat default `8080` port
