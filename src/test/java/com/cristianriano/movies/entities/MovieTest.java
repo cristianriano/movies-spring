@@ -1,6 +1,6 @@
 package com.cristianriano.movies.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class MovieTest {
     final long id = 1L;
     final Movie movie = new Movie(id, name);
 
-    assertEquals(name, movie.getName());
-    assertEquals(id, movie.getId());
+    assertThat(movie.getId()).isEqualTo(id);
+    assertThat(movie.getName()).isEqualTo(name);
   }
 }
