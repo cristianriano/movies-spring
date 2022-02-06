@@ -11,6 +11,7 @@ It aims to show the following Spring, Hibernate and Java features:
 - Deployment
 - Docker
 - Annotations and interceptors
+- CI/CD (Spotless, Sonarqube)
 
 ## Configuration
 
