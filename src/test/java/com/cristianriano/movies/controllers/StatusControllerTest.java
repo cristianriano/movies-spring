@@ -1,6 +1,6 @@
 package com.cristianriano.movies.controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,8 @@ public class StatusControllerTest {
 
   @Test
   void healthz_shouldReturnOK() {
-    assertEquals(
-        "OK",
+    assertThat(
         template.getForObject("http://localhost:" + port + "/healthz", String.class)
-    );
+    ).isEqualTo("OK");
   }
 }
