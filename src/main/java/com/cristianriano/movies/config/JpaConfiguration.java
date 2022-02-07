@@ -1,5 +1,6 @@
 package com.cristianriano.movies.config;
 
+import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +21,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 public class JpaConfiguration {
 
   private static final String DATASOURCE_PROPERTIES = "DATASOURCE_PROPERTIES";
+  private static final String HIBERNATE_DDL_AUTO = "hibernate.hbm2ddl.auto";
 
   @Bean(name = DATASOURCE_PROPERTIES)
   // This will load the properties matching the given prefix.
@@ -48,7 +50,7 @@ public class JpaConfiguration {
   public JpaVendorAdapter jpaVendorAdapter() {
     HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
     jpaVendorAdapter.setDatabase(Database.MYSQL);
-    jpaVendorAdapter.setGenerateDdl(true);
+//    jpaVendorAdapter.setGenerateDdl(true);
     return jpaVendorAdapter;
   }
 
@@ -60,6 +62,11 @@ public class JpaConfiguration {
     lemfb.setDataSource(dataSource(dsProps));
     lemfb.setJpaVendorAdapter(jpaVendorAdapter());
     lemfb.setPackagesToScan("com.cristianriano.movies.entities");
+
+    Properties properties = new Properties();
+    properties.setProperty(HIBERNATE_DDL_AUTO, "update");
+    lemfb.setJpaProperties(properties);
+
     return lemfb;
   }
 }
