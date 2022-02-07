@@ -22,9 +22,10 @@ public class JpaConfiguration {
   private static final String DATASOURCE_PROPERTIES = "DATASOURCE_PROPERTIES";
 
   @Bean(name = DATASOURCE_PROPERTIES)
-  // For the sake of this example we re-use the default spring datasource properties prefix
+  // This will load the properties matching the given prefix.
+  // Is not needed since we use the default spring datasource properties prefix, is only for the example
   @ConfigurationProperties(prefix = "spring.datasource")
-  public DataSourceProperties readerDataSourceProperties() {
+  public DataSourceProperties dataSourceProperties() {
     return new DataSourceProperties();
   }
 
