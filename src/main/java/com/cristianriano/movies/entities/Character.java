@@ -26,12 +26,14 @@ public class Character {
   @Column(name = "is_lead")
   private boolean isLead = false;
 
+  // ManyToOne are EAGER by default (same as OneToOne) but we add it explicitly
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "actor_id")
   @Setter
   private Actor actor;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  // Cascade saves/delete/update the movie when the character record does
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "movie_id")
   @Setter
   private Movie movie;
