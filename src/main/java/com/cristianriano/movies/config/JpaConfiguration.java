@@ -22,6 +22,7 @@ public class JpaConfiguration {
 
   private static final String DATASOURCE_PROPERTIES = "DATASOURCE_PROPERTIES";
   private static final String HIBERNATE_DDL_AUTO = "hibernate.hbm2ddl.auto";
+  public static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 
   @Bean(name = DATASOURCE_PROPERTIES)
   // This will load the properties matching the given prefix.
@@ -65,6 +66,8 @@ public class JpaConfiguration {
 
     Properties properties = new Properties();
     properties.setProperty(HIBERNATE_DDL_AUTO, "update");
+    // Should only be enabled for tests
+    properties.setProperty(HIBERNATE_SHOW_SQL, "true");
     lemfb.setJpaProperties(properties);
 
     return lemfb;
