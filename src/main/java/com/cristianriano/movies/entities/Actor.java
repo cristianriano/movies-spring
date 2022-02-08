@@ -10,10 +10,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 
-@Getter
 @Entity
-@Table(name = "movies")
-public class Movie {
+@Table(name = "actors")
+@Getter
+public class Actor {
   @Id
   @GeneratedValue
   private long id;
@@ -21,12 +21,13 @@ public class Movie {
   @Column(nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "movie")
+  // We use the name of the relationship on the other entity where the join columns are
+  @OneToMany(mappedBy = "actor")
   Set<Character> characters = new HashSet<>();
 
-  Movie() {}
+  Actor() {}
 
-  public Movie(final String name) {
+  public Actor(final String name) {
     this.name = name;
   }
 }
