@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,7 +24,12 @@ public class Actor {
   private String name;
 
   // We use the name of the relationship on the other entity where the join columns are
-  @OneToMany(mappedBy = "actor", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(
+      mappedBy = "actor",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true,
+      fetch = FetchType.LAZY
+  )
   Set<Character> characters = new HashSet<>();
 
   Actor() {}

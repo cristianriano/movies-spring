@@ -5,5 +5,6 @@ public enum MovieGenre {
   ANIMATION,
   COMEDY,
   DRAMA,
-  HORROR
+  HORROR,
+  NONE
 }

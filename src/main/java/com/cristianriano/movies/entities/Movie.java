@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,7 +25,12 @@ public class Movie {
   @Column(nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(
+      mappedBy = "movie",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true,
+      fetch = FetchType.LAZY
+  )
   private Set<Character> characters = new HashSet<>();
 
   @Enumerated(EnumType.STRING)
