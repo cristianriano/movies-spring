@@ -25,4 +25,13 @@ public class MovieService {
         );
     return movies;
   }
+
+  public MovieDto findById(final long id) {
+    final Movie movie = movieRepository.findOne(id);
+    if (movie == null) {
+      throw new NotFoundException("Movie not found with id " + id);
+    }
+
+    return new MovieDto(movie.getId(), movie.getName(), movie.getGenre());
+  }
 }

@@ -24,4 +24,9 @@ public class MovieController {
   public List<MovieDto> getAll() {
     return movieService.getAll();
   }
+
+  @GetMapping("/{id}")
+  public MovieDto get(@PathVariable final long id) {
+    return movieService.findById(id);
+  }
 }
