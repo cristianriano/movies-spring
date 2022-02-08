@@ -3,6 +3,7 @@ package com.cristianriano.movies.repositories;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cristianriano.movies.entities.Movie;
+import com.cristianriano.movies.entities.MovieGenre;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class MovieRepositoryTest {
 
   private static final String NAME = "Die Hard";
+  private static final MovieGenre GENRE = MovieGenre.ACTION;
 
   @Autowired
   private MovieRepository movieRepository;
@@ -28,10 +30,12 @@ public class MovieRepositoryTest {
 
   @Test
   void saveAndRetrieve() {
-    final Movie movie = buildMovie();
-    movieRepository.save(movie);
+    movieRepository.save(buildMovie());
 
     assertThat(movieRepository.count()).isEqualTo(1);
+    final var movies = movieRepository.findAllByName(NAME);
+    assertThat(movies).hasSize(1);
+    assertThat(movies.get(0).getGenre()).isEqualTo(GENRE);
   }
 
   @Test
@@ -45,6 +49,6 @@ public class MovieRepositoryTest {
   }
 
   private Movie buildMovie() {
-    return new Movie(NAME);
+    return new Movie(NAME, GENRE);
   }
 }

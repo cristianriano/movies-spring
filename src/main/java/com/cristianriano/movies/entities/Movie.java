@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,12 +25,21 @@ public class Movie {
   private String name;
 
   @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-  Set<Character> characters = new HashSet<>();
+  private Set<Character> characters = new HashSet<>();
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "genre")
+  private MovieGenre genre;
 
   Movie() {}
 
   public Movie(final String name) {
+    this(name, null);
+  }
+
+  public Movie(final String name, final MovieGenre genre) {
     this.name = name;
+    this.genre = genre;
   }
 
   // Since we have bidirectional relationships we need to make sure to keep in sync both ends

@@ -13,4 +13,10 @@ public class MovieTest {
 
     assertThat(movie.getName()).isEqualTo(name);
   }
+
+  @Test
+  void setsGenreCorrectly() {
+    final Movie movie = new Movie("The Ring", MovieGenre.HORROR);
+    assertThat(movie.getGenre().name()).isEqualTo("HORROR");
+  }
 }

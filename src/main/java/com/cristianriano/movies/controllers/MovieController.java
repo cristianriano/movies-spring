@@ -1,6 +1,7 @@
 package com.cristianriano.movies.controllers;
 
 import com.cristianriano.movies.entities.Movie;
+import com.cristianriano.movies.entities.MovieGenre;
 import com.cristianriano.movies.repositories.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class MovieController {
 
   @RequestMapping("/add")
   public String add() {
-    repository.save(new Movie("Die Hard"));
+    repository.save(new Movie("Die Hard", MovieGenre.ACTION));
     return "OK";
   }
 
