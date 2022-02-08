@@ -2,6 +2,7 @@ package com.cristianriano.movies.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,12 +22,25 @@ public class Movie {
   @Column(nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "movie")
+  @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
   Set<Character> characters = new HashSet<>();
 
   Movie() {}
 
   public Movie(final String name) {
     this.name = name;
+  }
+
+  // Since we have bidirectional relationships we need to make sure to keep in sync both ends
+  public Movie addCharacter(final Character character) {
+    characters.add(character);
+    character.setMovie(this);
+    return this;
+  }
+
+  public Movie removeCharacter(final Character character) {
+    characters.remove(character);
+    character.setMovie(null);
+    return this;
   }
 }
