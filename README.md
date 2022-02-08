@@ -35,7 +35,7 @@ grant all on movies_dev.* to 'movies'@'%';
 
 ## Run
 
-The app uses the Tomcat default `8080` port
+The app uses `8081` port from `application.properties`
 
 To run the project from the command line:\
 `./gradlew bootRun`
