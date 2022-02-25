@@ -3,14 +3,18 @@ package com.cristianriano.movies.services;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.cristianriano.movies.dtos.MovieDto;
 import com.cristianriano.movies.entities.Movie;
 import com.cristianriano.movies.entities.MovieGenre;
 import com.cristianriano.movies.errors.NotFoundException;
 import com.cristianriano.movies.repositories.MovieRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -26,6 +30,9 @@ public class MovieServiceTest {
 
   @InjectMocks
   private MovieService movieService;
+
+  @Captor
+  private ArgumentCaptor<Movie> movieCaptor;
 
   @Test
   void returnMovieDtoById() {
@@ -44,5 +51,17 @@ public class MovieServiceTest {
     assertThatThrownBy(
         () -> movieService.findById(1L)
     ).isInstanceOf(NotFoundException.class);
+  }
+
+  @Test
+  void create_callsTheRepo() {
+    final MovieDto dto = new MovieDto(null, NAME, GENRE);
+    movieService.create(dto);
+
+    verify(movieRepository).save(movieCaptor.capture());
+    final Movie persistedMovie = movieCaptor.getValue();
+
+    assertThat(persistedMovie.getGenre()).isEqualTo(GENRE);
+    assertThat(persistedMovie.getName()).isEqualTo(NAME);
   }
 }
