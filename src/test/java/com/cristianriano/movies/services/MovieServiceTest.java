@@ -64,4 +64,13 @@ public class MovieServiceTest {
     assertThat(persistedMovie.getGenre()).isEqualTo(GENRE);
     assertThat(persistedMovie.getName()).isEqualTo(NAME);
   }
+
+  @Test
+  void create_returnsCreatedMovie() {
+    final MovieDto dto = new MovieDto(null, NAME, GENRE);
+    var persisted = movieService.create(dto);
+
+    assertThat(persisted.getGenre()).isEqualTo(GENRE);
+    assertThat(persisted.getName()).isEqualTo(NAME);
+  }
 }

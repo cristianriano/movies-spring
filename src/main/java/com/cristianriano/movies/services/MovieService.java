@@ -6,6 +6,7 @@ import com.cristianriano.movies.errors.NotFoundException;
 import com.cristianriano.movies.repositories.MovieRepository;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,6 +37,14 @@ public class MovieService {
     final Movie movie = toMovie(dto);
     movieRepository.save(movie);
     return toDto(movie);
+  }
+
+  public void delete(final long id) {
+    try {
+      movieRepository.deleteById(id);
+    } catch (EmptyResultDataAccessException ex) {
+      throw new NotFoundException("Movie not found with id " + id);
+    }
   }
 
   private MovieDto toDto(Movie movie) {

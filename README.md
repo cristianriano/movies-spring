@@ -40,6 +40,16 @@ The app uses `8081` port from `application.properties`
 To run the project from the command line:\
 `./gradlew bootRun`
 
+### Movie Endpoints
+
+1. Create
+```shell
+curl -i -X POST localhost:8081/movies \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -d '{"name": "Scream", "genre": "HORROR"}'
+```
+
 ## Tests
 
 To run all project tests:\
