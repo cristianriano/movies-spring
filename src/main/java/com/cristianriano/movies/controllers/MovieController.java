@@ -1,9 +1,12 @@
 package com.cristianriano.movies.controllers;
 
+import com.cristianriano.movies.dtos.MovieDto;
 import com.cristianriano.movies.entities.Movie;
-import com.cristianriano.movies.entities.MovieGenre;
-import com.cristianriano.movies.repositories.MovieRepository;
+import com.cristianriano.movies.services.MovieService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/movies")
 public class MovieController {
-  private final MovieRepository repository;
 
-  @RequestMapping("/add")
-  public String add() {
-    repository.save(new Movie("Die Hard", MovieGenre.ACTION));
-    return "OK";
+  private final MovieService movieService;
+
+  @GetMapping()
+  public List<MovieDto> getAll() {
+    return movieService.getAll();
   }
 
-  @RequestMapping("/all")
-  public Iterable<Movie> all() {
-    return repository.findAll();
+  @GetMapping("/{id}")
+  public MovieDto get(@PathVariable final long id) {
+    return movieService.findById(id);
   }
 }
