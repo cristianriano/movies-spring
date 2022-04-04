@@ -4,8 +4,6 @@ import com.cristianriano.movies.dtos.MovieDto;
 import com.cristianriano.movies.services.MovieService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

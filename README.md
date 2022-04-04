@@ -13,6 +13,7 @@ It aims to show the following Spring, Hibernate and Java features:
 - Annotations and interceptors
 - CI/CD (Spotless, Sonarqube)
 - Test containers (using a @TestConfiguration for integration tests)
+- AspectJ (around hooks)
 
 ## Configuration
 
